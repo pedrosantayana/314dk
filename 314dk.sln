@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31729.503
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "314DK", "brainfuck\314DK.csproj", "{938BF44A-A4CF-4C67-B4CE-75534A328597}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "314dk", "brainfuck\314dk.csproj", "{938BF44A-A4CF-4C67-B4CE-75534A328597}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

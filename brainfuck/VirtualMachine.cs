@@ -1,36 +1,28 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using System.Text;
 
 namespace DevelopmentKit
 {
     class VirtualMachine
     {
-        byte[] program;
-        uint instructionPointer = 0;
-        byte[] memory = new byte[uint.MaxValue];
-        uint pointer = 0;
-        Stack<uint> loopStack = new Stack<uint>();
+        byte[] instructions;
+        int instructionPointer = 0;
+        public byte[] memory = new byte[4000000];
+        Stack<byte> stack = new Stack<byte>();
+        int pointer = 0;
+        Stack<int> loopStack = new Stack<int>();
 
-        public VirtualMachine(string bytecodeFileDirectory)
+        public VirtualMachine(byte[] instructions)
         {
-            byte[] programBytecode = File.ReadAllBytes(bytecodeFileDirectory);
-            program = new byte[programBytecode.Length * 2];
-            for (int i = 0; i < programBytecode.Length; i++)
-            {
-                program[i * 2] = (byte)(programBytecode[i] >> 4);
-                program[i * 2 + 1] = (byte)(programBytecode[i] & 0b00001111);
-            }
+            this.instructions = instructions;
         }
 
         public void Start()
         {
-            Encoding ascii = Encoding.ASCII;
-            while (instructionPointer < program.Length)
+            while (instructionPointer < instructions.Length)
             {
-                switch (program[instructionPointer])
+                switch (instructions[instructionPointer])
                 {
                     case 0x00:
                         //nop
@@ -48,7 +40,7 @@ namespace DevelopmentKit
                         memory[pointer]--;
                         break;
                     case 0x05:
-                        Console.Write(ascii.GetString(new byte[] { memory[pointer] }));
+                        Console.Write(Encoding.ASCII.GetString(new byte[] { memory[pointer] }));
                         break;
                     case 0x06:
                         char inputChar = Console.ReadKey().KeyChar;
@@ -65,6 +57,23 @@ namespace DevelopmentKit
                         {
                             instructionPointer = loopStack.Peek();
                         }
+                        break;
+                    case 0x09:
+                        stack.Push(memory[pointer]);
+                        break;
+                    case 0x0A:
+                        memory[pointer] = stack.Pop();
+                        break;
+                    case 0x0B:
+                        memory[pointer] = stack.Peek();
+                        break;
+                    case 0x0C: 
+                        break;
+                    case 0x0D:
+                        break;
+                    case 0x0E:
+                        break;
+                    case 0x0F:
                         break;
                 }
                 instructionPointer++;

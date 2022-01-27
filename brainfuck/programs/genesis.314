@@ -1,9 +1,17 @@
-﻿next
-add 10
-start
-back
-print
-add 1
-next
-sub 1
+﻿fn main
+	add 49 # arg a
+	next 1
+	add 5 # arg b
+	call sum
+	back 1
+	print
+end
+
+fn sum
+	start
+	sub 1
+	back 1
+	add 1
+	next 1
+	stop
 end
