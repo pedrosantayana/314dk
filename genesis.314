@@ -1,0 +1,44 @@
+﻿fn main
+	add 49 # arg a
+	next 1
+	add 5 # arg b
+	call sum
+	back 1
+	print
+end
+
+fn sum
+	start
+	sub 1
+	back 1
+	add 1
+	next 1
+	stop
+end
+
+
+# -------------------------------------
+# Types: 
+# byte: 255, addr: 123123123, hex: 0x00FF00, str: "314"
+fn main
+	if 
+end
+
+fn move_next(addr value) # regex solution
+{
+	start
+		next value
+		add 1
+		back value
+		sub 1
+	stop
+}
+
+fn move_back(addr value)
+	start
+		back value
+		add 1
+		back value
+		sub 1
+	stop
+end
