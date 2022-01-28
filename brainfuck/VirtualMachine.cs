@@ -25,55 +25,59 @@ namespace DevelopmentKit
                 switch (instructions[instructionPointer])
                 {
                     case 0x00:
-                        //nop
-                        break;
-                    case 0x01:
                         pointer++;
                         break;
-                    case 0x02:
+                    case 0x01:
                         pointer--;
                         break;
-                    case 0x03:
+                    case 0x02:
                         memory[pointer]++;
                         break;
-                    case 0x04:
+                    case 0x03:
                         memory[pointer]--;
                         break;
-                    case 0x05:
+                    case 0x04:
                         Console.Write(Encoding.ASCII.GetString(new byte[] { memory[pointer] }));
                         break;
-                    case 0x06:
+                    case 0x05:
                         char inputChar = Console.ReadKey().KeyChar;
                         memory[pointer] = Convert.ToByte(inputChar);
                         break;
-                    case 0x07:
+                    case 0x06:
                         if (loopStack.Count == 0 || instructionPointer != loopStack.Peek())
                         {
                             loopStack.Push(instructionPointer);
                         }
                         break;
-                    case 0x08:
+                    case 0x07:
                         if (memory[pointer] != 0)
                         {
                             instructionPointer = loopStack.Peek();
                         }
                         break;
-                    case 0x09:
+                    case 0x08:
                         stack.Push(memory[pointer]);
                         break;
-                    case 0x0A:
+                    case 0x09:
                         memory[pointer] = stack.Pop();
                         break;
-                    case 0x0B:
+                    case 0x0A:
                         memory[pointer] = stack.Peek();
                         break;
-                    case 0x0C: 
+                    case 0x0B:
+                        memory[pointer] += stack.Peek();
+                        break;
+                    case 0x0C:
+                        memory[pointer] -= stack.Peek();
                         break;
                     case 0x0D:
+                        memory[pointer] &= stack.Peek();
                         break;
                     case 0x0E:
+                        memory[pointer] |= stack.Peek();
                         break;
                     case 0x0F:
+                        memory[pointer] ^= stack.Peek();
                         break;
                 }
                 instructionPointer++;

@@ -1,17 +1,23 @@
 ﻿fn main
-	add 49 # arg a
-	next 1
-	add 5 # arg b
-	call sum
-	back 1
-	print
+store hex 506564726F204672616E636973636F
+back 15
+start
+print
+next
+stop
 end
 
-fn sum
-	start
-	sub 1
-	back 1
-	add 1
-	next 1
-	stop
+fn init_values
+next
+add
+start
+push
+next
+pop
+add
+stop
 end
+
+
+
+# types: byte 127; char: '' hex 

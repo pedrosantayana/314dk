@@ -44,11 +44,11 @@ namespace DevelopmentKit
                     }
                     string[] sourceCode = File.ReadAllLines(args[1]);
 
-                    Console.Write("Compiling... ");
-                    byte[] instructions = Compiler.Compile(sourceCode);
+                    Console.WriteLine("[Compilation]");
+                    byte[] instructions = Compiler.CompileProgram(sourceCode);
                     Console.WriteLine("Compiled {0} instructions.", instructions.Length);
 
-                    VirtualMachine vma = new VirtualMachine(Compiler.Compile(sourceCode));
+                    VirtualMachine vma = new VirtualMachine(instructions);
                     Console.WriteLine("[Program execution]");
                     vma.Start();
                     Console.WriteLine("\n[Memory dump]");
